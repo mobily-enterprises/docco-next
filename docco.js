@@ -9,7 +9,7 @@
 // Install and use
 // ---------------
 // To use Docco Next run `npm install -g docco-next` and run it passing it a list of files
-// (e.g. docco src/*js)
+// (e.g. `docco src/*js`)
 //
 // By default, every file will be converted into formatted HTML and will be placed in the
 // default destination directory (`docs` by default). It's also possible to
