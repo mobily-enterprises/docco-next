@@ -3,6 +3,8 @@
 // **Docco Next** facilitates [literate programming](https://en.wikipedia.org/wiki/Literate_programming)
 // in several languages. It's written in modern Javascript, and runs in Node.
 //
+// See the [generated documentation as HTML](https://mobily-enterprises.github.io/docco-next/)
+//
 // Install and use
 // ---------------
 // To use Docco Next run `npm install -g docco-next` and run it passing it a list of files
