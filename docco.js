@@ -14,8 +14,7 @@
 // By default, every file will be converted into formatted HTML and will be placed in the
 // default destination directory (`docs` by default). It's also possible to
 // convert files to Markdown, rather than HTML. Note that files will
-// retain their original names and will change their extension to `html` when
-// converted to HTML and `md` when converted to Markdown.
+// retain their original names and will change their extension to `html`.
 //
 // Is it literate programming?
 // ---------------------------
