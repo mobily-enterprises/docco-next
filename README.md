@@ -1,13 +1,6 @@
 
-```
-/* eslint  no-var: "error" */
-
-```
-
 Docco Next
 =====
-
-TODO: redo original HTML templates
 
 **Docco Next** facilitates [literate programming](https://en.wikipedia.org/wiki/Literate_programming)
 in several languages. It's written in modern Javascript, and runs in Node.
@@ -38,7 +31,7 @@ actually makes sense.
 A notable example is CoffeeScript, which supports .litcoffee files natively.
 
 However, not many languages support literate programming. Most languages will
-need a proprocessor, for example to convert the `.js.md` file into ``.js`.
+need a proprocessor, for example to convert the `.js.md` file into `.js`.
 [lit](https://github.com/vijithassar/lit) is one of such tools. In Node, you
 can use Rich Harris's [lit-node](https://github.com/Rich-Harris/lit-node)
 to require .md files directly.
@@ -152,7 +145,7 @@ async function run (args = process.argv) {
     .version(version)
     .usage('[options] files')
     .option('-L, --languages [file]', 'use a custom languages.json')
-    .option('-l, --layout [name]', 'choose a layout (default, paralell or classic)')
+    .option('-l, --layout [name]', 'choose a layout (default, parallel or classic)')
     .option('-o, --output [path]', 'output to a given folder')
     .option('-c, --css [file]', 'use a custom css file')
     .option('-p, --plugin [file]', 'use a custom plugin file')
@@ -900,6 +893,5 @@ docco: ./docco.js -> dir2/docco.html
 */
 
 ```
-
 
 
