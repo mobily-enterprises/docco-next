@@ -1,0 +1,44 @@
+{
+  "name": "docco-next",
+  "description": "Literate programming parser",
+  "keywords": [
+    "documentation",
+    "generator",
+    "literate",
+    "literate programming"
+  ],
+  "scripts": {
+    "docs": "bin/docco -o .  -l plain -x md  ./docco.js;mv docco.md README.md"
+  },
+  "author": "Tony Mobily",
+  "version": "0.9.0",
+  "license": "GPL3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/"
+  },
+  "engines": {
+    "node": ">=8.0"
+  },
+  "dependencies": {
+    "commander": ">= 0.5.2",
+    "ejs": "^2.6.2",
+    "fs-extra": ">= 0.6.0",
+    "highlight.js": ">= 8.0.x",
+    "marked": ">= 0.2.7"
+  },
+  "devDependencies": {
+    "eslint": "^6.3.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-html": "^6.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-lit": "^1.2.0",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
+  },
+  "main": "./docco",
+  "bin": {
+    "docco": "./bin/docco"
+  }
+}
