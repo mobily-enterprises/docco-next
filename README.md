@@ -1,6 +1,5 @@
 
-Docco Next
-=====
+# Docco Next
 
 [Docco Next](https://github.com/mobily-enterprises/docco-next) facilitates
 [literate programming](https://en.wikipedia.org/wiki/Literate_programming)
@@ -793,7 +792,8 @@ async function formatAsHtml (source, sections, config = {}, lang) {
     for (const section of sections) {
       let code = highlightjs.highlight(lang.name, section.codeText).value
       code = code.replace(/\s+$/, '')
-      section.codeHtml = `<div class='highlight'><pre>${code}</pre></div>`
+      if (code !== '') section.codeHtml = `<div class='highlight'><pre>${code}</pre></div>`
+      else section.codeHtml = ''
       if (config.plugin.beforeMarked) {
         const newText = await config.plugin.beforeMarked(section.docsText)
         if (newText !== section.docsText) console.log('newtext:', newText)
@@ -839,6 +839,12 @@ async function formatAsHtml (source, sections, config = {}, lang) {
     const maybeTitle = first && first.type === 'heading' && first.depth === 1
     const title = maybeTitle ? first.text : path.basename(source)
     const firstSectionIsTitle = maybeTitle && lexed.length === 1
+
+    /* If the first section is the title, then get rid of it  */
+    /* since the title is already being displayed by the template anyway */
+    if (firstSectionIsTitle) {
+      sections.shift()
+    }
 
     /* The `css` variable will be available in the template as a relative */
     /* link to the CSS file */

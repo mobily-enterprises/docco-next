@@ -15,11 +15,6 @@
         <h1>Docco Next</h1>
 
         
-          
-          
-        
-
-        
       </div>
       
         
@@ -100,40 +95,32 @@ pure literate style.</p>
 </ul>
 <p>In Javascript terms, this becomes:</p>
 
-        
-          <div class='highlight'><pre><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>)
+        <div class='highlight'><pre><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>)
 <span class="hljs-keyword">const</span> ejs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'ejs'</span>)
 <span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs-extra'</span>)
 <span class="hljs-keyword">const</span> marked = <span class="hljs-built_in">require</span>(<span class="hljs-string">'marked'</span>)
 <span class="hljs-keyword">const</span> commander = <span class="hljs-built_in">require</span>(<span class="hljs-string">'commander'</span>)
 <span class="hljs-keyword">const</span> highlightjs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'highlight.js'</span>)</pre></div>
-        
       
         
         <p>On startup, the <code>version</code> variable is worked out straight from the <code>package.json</code>
 file, which is loaded using <code>require</code></p>
 
-        
-          <div class='highlight'><pre><span class="hljs-keyword">const</span> pkg = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./package.json'</span>)
+        <div class='highlight'><pre><span class="hljs-keyword">const</span> pkg = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./package.json'</span>)
 <span class="hljs-keyword">const</span> version = pkg.version</pre></div>
-        
       
         
         <p>Docco Next manages several languages, stored in <code>layouts/languages.json</code>.
 Users can add more languages if desired. However, the list of default languages
 (and their relevant information) is stored in <code>layouts/languages.json</code></p>
 
-        
-          <div class='highlight'><pre><span class="hljs-keyword">const</span> defaultLanguages = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./layouts/languages.json'</span>)</pre></div>
-        
+        <div class='highlight'><pre><span class="hljs-keyword">const</span> defaultLanguages = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./layouts/languages.json'</span>)</pre></div>
       
         
         <p>By default, <code>marked</code> is run with very basic options (basically, just turning
 <code>smartypants</code> on). Users can add more options, but this is the starting point</p>
 
-        
-          <div class='highlight'><pre><span class="hljs-keyword">const</span> defaultMarkedOptions = { <span class="hljs-attr">smartypants</span>: <span class="hljs-literal">true</span> }</pre></div>
-        
+        <div class='highlight'><pre><span class="hljs-keyword">const</span> defaultMarkedOptions = { <span class="hljs-attr">smartypants</span>: <span class="hljs-literal">true</span> }</pre></div>
       
         
         <h2 id="configuration">Configuration</h2>
@@ -154,8 +141,7 @@ object will include <code>{ languages: &quot;./some/file.json&quot;}</code>.</p>
 out how the command is used.</p>
 <p>This is the full set of options available in Docco Next:</p>
 
-        
-          <div class='highlight'><pre><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">run</span> (<span class="hljs-params">args = process.argv</span>) </span>{
+        <div class='highlight'><pre><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">run</span> (<span class="hljs-params">args = process.argv</span>) </span>{
   commander
     .name(<span class="hljs-string">'docco'</span>)
     .version(version)
@@ -181,7 +167,6 @@ out how the command is used.</p>
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log(commander.helpInformation())
   }
 }</pre></div>
-        
       
         
         <p>Three configuration functions are called:</p>
@@ -212,8 +197,7 @@ will need to be objects. However, from the command line, they will be the paths 
 JSON files, and will be converted to objects by <code>cmdLineNormalise()</code>, which
 reads:</p>
 
-        
-          <div class='highlight'><pre><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">cmdLineNormalise</span> (<span class="hljs-params">config</span>) </span>{
+        <div class='highlight'><pre><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">cmdLineNormalise</span> (<span class="hljs-params">config</span>) </span>{
   <span class="hljs-keyword">if</span> (config.languages) {
     <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">await</span> fileExists(config.languages)) {
       <span class="hljs-built_in">console</span>.error(<span class="hljs-string">'Languages file not found:'</span>, config.languages)
@@ -246,7 +230,6 @@ reads:</p>
 
   config.sources = config.args
 }</pre></div>
-        
       
         
         <h3 id="step-2-configure"><strong>Step 2: <code>configure()</code></strong></h3>
@@ -279,8 +262,7 @@ a language not in the <code>languages</code> array) is filtered out (with a warn
 object that every call can use. This is why every single function that uses
 <code>config</code> will call <code>configure</code> first.</p>
 
-        
-          <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">configure</span> (<span class="hljs-params">config</span>) </span>{
+        <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">configure</span> (<span class="hljs-params">config</span>) </span>{
   <span class="hljs-keyword">if</span> (config.configured) <span class="hljs-keyword">return</span>
   config.configured = <span class="hljs-literal">true</span>
 
@@ -317,7 +299,6 @@ object that every call can use. This is why every single function that uses
     <span class="hljs-keyword">return</span> there
   })
 }</pre></div>
-        
       
         
         <h3 id="step-3-cmdlinesanitycheck"><strong>Step 3: <code>cmdLineSanityCheck()</code></strong></h3>
@@ -335,8 +316,7 @@ The same applies to <code>config.layout</code> (the path to the layout, which is
 the “theme” used), <code>config.css</code> (the alternative CSS file used), and all files
 specified in the <code>sources</code> array.</p>
 
-        
-          <div class='highlight'><pre><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">cmdLineSanityCheck</span> (<span class="hljs-params">config</span>) </span>{
+        <div class='highlight'><pre><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">cmdLineSanityCheck</span> (<span class="hljs-params">config</span>) </span>{
   <span class="hljs-keyword">if</span> (config.output &amp;&amp; !<span class="hljs-keyword">await</span> dirExists(config.output)) {
     <span class="hljs-built_in">console</span>.error(<span class="hljs-string">'Output directory not found:'</span>, config.output)
     process.exit(<span class="hljs-number">1</span>)
@@ -362,7 +342,6 @@ specified in the <code>sources</code> array.</p>
     }
   }
 }</pre></div>
-        
       
         
         <h2 id="going-through-each-file-via-documentone-and-documentall">Going through each file via documentOne() and documentAll()</h2>
@@ -397,8 +376,7 @@ is an proper (not-null) object that is not empty</li>
 </ul>
 <p>Here is the code for those functions:</p>
 
-        
-          <div class='highlight'><pre><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dirExists</span> (<span class="hljs-params">dir</span>) </span>{
+        <div class='highlight'><pre><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dirExists</span> (<span class="hljs-params">dir</span>) </span>{
   <span class="hljs-keyword">if</span> (<span class="hljs-keyword">await</span> fs.pathExists(dir)) {
     <span class="hljs-keyword">const</span> stat = <span class="hljs-keyword">await</span> fs.lstat(dir)
     <span class="hljs-keyword">return</span> stat.isDirectory()
@@ -465,7 +443,6 @@ is an proper (not-null) object that is not empty</li>
 
   <span class="hljs-keyword">return</span> lang
 }</pre></div>
-        
       
         
         <p>Now that everything <em>really is</em> ready, it’s time to (finally!) go through
@@ -478,8 +455,7 @@ it may seem superfluous to run it again. However, keep in mind that
 Docco Next exports an API. So, every call that receives <code>config</code> will always
 run <code>configure(config)</code> to make sure that sane defaults are set.</p>
 
-        
-          <div class='highlight'><pre><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">documentAll</span> (<span class="hljs-params">config = {}</span>) </span>{
+        <div class='highlight'><pre><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">documentAll</span> (<span class="hljs-params">config = {}</span>) </span>{
   configure(config)
   <span class="hljs-keyword">await</span> fs.mkdirs(config.output)
 
@@ -490,7 +466,6 @@ run <code>configure(config)</code> to make sure that sane defaults are set.</p>
   <span class="hljs-keyword">await</span> copyAsset(config.css, <span class="hljs-string">'file'</span>, config)
   <span class="hljs-keyword">await</span> copyAsset(config.public, <span class="hljs-string">'directory'</span>, config)
 }</pre></div>
-        
       
         
         <p><code>documentOne</code> is the centrepiece of the program: it uses the important
@@ -511,8 +486,7 @@ HTML string based on the array of sections passed</li>
 </ul>
 <p>Here is the source code:</p>
 
-        
-          <div class='highlight'><pre><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">documentOne</span> (<span class="hljs-params">source, config = {}</span>) </span>{
+        <div class='highlight'><pre><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">documentOne</span> (<span class="hljs-params">source, config = {}</span>) </span>{
   configure(config)
 
   <span class="hljs-keyword">const</span> buffer = <span class="hljs-keyword">await</span> fs.readFile(source)
@@ -533,7 +507,6 @@ HTML string based on the array of sections passed</li>
     <span class="hljs-built_in">console</span>.warn(<span class="hljs-string">`docco: file not processed, language not supported: (<span class="hljs-subst">${path.basename(source)}</span>)`</span>)
   }
 }</pre></div>
-        
       
         
         <h2 id="the-actual-parsing-and-manipulation">The actual parsing and manipulation</h2>
@@ -569,8 +542,7 @@ the flag <code>literate</code> is set to true, <em>or</em> when the file is
 for example <code>something.js.md</code> – that is, a Markdown file that
 contains Javascript</p>
 
-        
-          <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">litToCode</span> (<span class="hljs-params">lines, lang</span>) </span>{
+        <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">litToCode</span> (<span class="hljs-params">lines, lang</span>) </span>{
   <span class="hljs-keyword">const</span> retLines = []
   <span class="hljs-keyword">const</span> markdownIndented = <span class="hljs-regexp">/^([ ]{4}|[ ]{0,3}\t)/</span>
   <span class="hljs-keyword">let</span> inCode = lines[<span class="hljs-number">0</span>] &amp;&amp; markdownIndented.exec(lines[<span class="hljs-number">0</span>])
@@ -599,7 +571,6 @@ contains Javascript</p>
   }
   <span class="hljs-keyword">return</span> retLines
 }</pre></div>
-        
       
         
         <h2 id="parse">parse()</h2>
@@ -636,8 +607,7 @@ used: if there is anything in <code>codeText</code>, it means that the parser is
 in the middle of a code section, and therefore the empty line will be
 added to that code section.</p>
 
-        
-          <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">parse</span> (<span class="hljs-params">source, lines, config = {}, lang</span>) </span>{
+        <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">parse</span> (<span class="hljs-params">source, lines, config = {}, lang</span>) </span>{
   <span class="hljs-keyword">let</span> codeText, docsText
   <span class="hljs-keyword">const</span> sections = []
 
@@ -695,7 +665,6 @@ added to that code section.</p>
 
   <span class="hljs-keyword">return</span> sections
 }</pre></div>
-        
       
         
         <h2 id="formatashtml">formatAsHtml()</h2>
@@ -748,8 +717,7 @@ reloading of the same file (since <code>formatAsHtml()</code> is potentially cal
 multiple times, once for each passed file). Memoization avoids using a
 global variable.</p>
 
-        
-          <div class='highlight'><pre><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">formatAsHtml</span> (<span class="hljs-params">source, sections, config = {}, lang</span>) </span>{
+        <div class='highlight'><pre><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">formatAsHtml</span> (<span class="hljs-params">source, sections, config = {}, lang</span>) </span>{
   configure(config)
 
   <span class="hljs-comment">/* Format sections, as HTML (from Markdown) or as highlighted code */</span>
@@ -783,7 +751,8 @@ global variable.</p>
     <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> section <span class="hljs-keyword">of</span> sections) {
       <span class="hljs-keyword">let</span> code = highlightjs.highlight(lang.name, section.codeText).value
       code = code.replace(<span class="hljs-regexp">/\s+$/</span>, <span class="hljs-string">''</span>)
-      section.codeHtml = <span class="hljs-string">`&lt;div class='highlight'&gt;&lt;pre&gt;<span class="hljs-subst">${code}</span>&lt;/pre&gt;&lt;/div&gt;`</span>
+      <span class="hljs-keyword">if</span> (code !== <span class="hljs-string">''</span>) section.codeHtml = <span class="hljs-string">`&lt;div class='highlight'&gt;&lt;pre&gt;<span class="hljs-subst">${code}</span>&lt;/pre&gt;&lt;/div&gt;`</span>
+      <span class="hljs-keyword">else</span> section.codeHtml = <span class="hljs-string">''</span>
       <span class="hljs-keyword">if</span> (config.plugin.beforeMarked) {
         <span class="hljs-keyword">const</span> newText = <span class="hljs-keyword">await</span> config.plugin.beforeMarked(section.docsText)
         <span class="hljs-keyword">if</span> (newText !== section.docsText) <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'newtext:'</span>, newText)
@@ -830,6 +799,12 @@ global variable.</p>
     <span class="hljs-keyword">const</span> title = maybeTitle ? first.text : path.basename(source)
     <span class="hljs-keyword">const</span> firstSectionIsTitle = maybeTitle &amp;&amp; lexed.length === <span class="hljs-number">1</span>
 
+    <span class="hljs-comment">/* If the first section is the title, then get rid of it  */</span>
+    <span class="hljs-comment">/* since the title is already being displayed by the template anyway */</span>
+    <span class="hljs-keyword">if</span> (firstSectionIsTitle) {
+      sections.shift()
+    }
+
     <span class="hljs-comment">/* The `css` variable will be available in the template as a relative */</span>
     <span class="hljs-comment">/* link to the CSS file */</span>
     <span class="hljs-keyword">const</span> css = relativeToThisFile(path.join(
@@ -857,7 +832,6 @@ global variable.</p>
     <span class="hljs-keyword">return</span> html
   }
 }</pre></div>
-        
       
         
         <h2 id="public-api">Public API</h2>
@@ -868,8 +842,7 @@ global variable.</p>
         <p>These functions are available once the module is <code>required()</code>. They are
 self contained and can be used to take Docco Next to different directions.</p>
 
-        
-          <div class='highlight'><pre>exports = <span class="hljs-built_in">module</span>.exports = {
+        <div class='highlight'><pre>exports = <span class="hljs-built_in">module</span>.exports = {
   copyAsset,
   run,
   parse,
@@ -886,7 +859,6 @@ self contained and can be used to take Docco Next to different directions.</p>
 docco: ./docco.js -&gt; dir2/docco.html
 
 */</span></pre></div>
-        
       
     </div>
     <footer>
