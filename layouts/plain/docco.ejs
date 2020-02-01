@@ -1,6 +1,7 @@
 <%
   // Create the full string
   var md = ''
+  md += `# ${title}\n\n`
   for (var i = 0, l = sections.length; i<l; i++) {
     var section = sections[i];
     if (section.docsText) {

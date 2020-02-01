@@ -14,13 +14,6 @@
       <div class="header">
         <h1><%= title %></h1>
 
-        <% if (firstSectionIsTitle) { %>
-          <% var section = sections.shift(); %>
-          <% if (!(/^\s*$/).test(section.codeText)) { %>
-            <%- section.codeHtml %>
-          <% } %>
-        <% } %>
-
         <% if (sources.length > 1) { %>
           <div class="toc">
             <h3>Table of Contents</h3>
@@ -40,9 +33,7 @@
       <% for (var i = 0, l = sections.length; i<l; i++) { %>
         <% var section = sections[i]; %>
         <%- section.docsHtml %>
-        <% if (!(/^\s*$/).test(section.codeText)) { %>
-          <%- section.codeHtml %>
-        <% } %>
+        <%- section.codeHtml %>
       <% } %>
     </div>
     <footer>
