@@ -34,13 +34,13 @@
 // can use Rich Harris's [lit-node](https://github.com/Rich-Harris/lit-node)
 // to require .md files directly.
 //
-// Docco Next works with normal source code (such as .js or .c) as well as literate
+// Docco Next works with normal source code (such as `.js` or `.c`) as well as literate
 // source code (such as literate CoffeeScript, `.litcoffee`, or `.js.md`).
 //
 // With pure literate style, all you have to do is add the .md extension to your
 // source file.
 //
-// When processing source files (such as .js or .c), one line comments are considered
+// When processing source files (such as `.js` or `.c`), one line comments are considered
 // documentation and are parsed using Markdown. The code (that is, anything that is
 // not a one-line comment)  is processed by [Highlight.js](http://highlightjs.org/).
 //
