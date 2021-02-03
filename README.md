@@ -193,7 +193,7 @@ JSON files
 The fuction also assigns `config.args` (which is the list of files to be
 converted) to `config.sources`.
 
-To sum up: when using Docco Next as a library, `config.languages` and `config.maked`
+To sum up: when using Docco Next as a library, `config.languages` and `config.marked`
 will need to be objects. However, from the command line, they will be the paths of
 JSON files, and will be converted to objects by `cmdLineNormalise()`, which
 reads:
