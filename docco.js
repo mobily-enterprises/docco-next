@@ -132,7 +132,7 @@ async function run (args = process.argv) {
     .option('-x, --outputExtension [ext]', 'set default file extension for all outputs')
     .parse(args)
   if (commander.args.length) {
-    const config = { ...commander }
+    const config = { ...commander.opts(), args: commander.args }
     await cmdLineNormalise(config)
     configure(config)
     await cmdLineSanityCheck(config)
