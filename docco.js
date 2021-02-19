@@ -459,6 +459,7 @@ async function documentAll (config = {}) {
 
 async function documentOne (source, config = {}) {
   configure(config)
+  // console.log(source)
 
   const buffer = await fs.readFile(source)
   let lines = buffer.toString().split('\n')
@@ -727,10 +728,16 @@ async function formatAsHtml (source, sections, config = {}, lang) {
       else section.codeHtml = ''
       if (config.plugin.beforeMarked) {
         const newText = await config.plugin.beforeMarked(section.docsText)
-        if (newText !== section.docsText) console.log('newtext:', newText)
+        // if (newText !== section.docsText) console.log('newtext:', newText)
         section.docsText = newText
       }
       section.docsHtml = marked(section.docsText)
+
+      if (config.plugin.afterHtml) {
+        const newHtml = await config.plugin.afterHtml(section.docsHtml)
+        // if (newText !== section.docsText) console.log('newtext:', newText)
+        section.docsHtml = newHtml
+      }
     }
   }
 
@@ -755,6 +762,31 @@ async function formatAsHtml (source, sections, config = {}, lang) {
         path.relative(from, to),
         path.basename(file)
       )
+    }
+
+    function includeText (source) {
+      return (s, silentFail) => {
+        let contents
+        let file
+        const sourceDir = path.dirname(source)
+        if (path.isAbsolute(s)) {
+          file = s
+        } else {
+          file = path.join(sourceDir, s)
+        }
+        try {
+          contents = fs.readFileSync(file)
+          return contents
+        } catch (e) {
+          if (silentFail && e.code === 'ENOENT') return ''
+          if (e.code === 'ENOENT') {
+            console.error('Could not load included file:', file)
+          } else {
+            console.log(e)
+          }
+          process.exit(100)
+        }
+      }
     }
 
     const thisFile = finalPath(source, config)
@@ -788,6 +820,7 @@ async function formatAsHtml (source, sections, config = {}, lang) {
 
     /* Make up the HTML based on the template */
     const html = template({
+      includeText: includeText(source),
       source,
       sources: config.sources,
       css,
