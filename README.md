@@ -37,13 +37,13 @@ need a proprocessor, for example to convert the `.js.md` file into `.js`.
 can use Rich Harris's [lit-node](https://github.com/Rich-Harris/lit-node)
 to require .md files directly.
 
-Docco Next works with normal source code (such as .js or .c) as well as literate
+Docco Next works with normal source code (such as `.js` or `.c`) as well as literate
 source code (such as literate CoffeeScript, `.litcoffee`, or `.js.md`).
 
 With pure literate style, all you have to do is add the .md extension to your
 source file.
 
-When processing source files (such as .js or .c), one line comments are considered
+When processing source files (such as `.js` or `.c`), one line comments are considered
 documentation and are parsed using Markdown. The code (that is, anything that is
 not a one-line comment)  is processed by [Highlight.js](http://highlightjs.org/).
 
@@ -156,7 +156,7 @@ async function run (args = process.argv) {
     .option('-x, --outputExtension [ext]', 'set default file extension for all outputs')
     .parse(args)
   if (commander.args.length) {
-    const config = { ...commander }
+    const config = { ...commander.opts(), args: commander.args }
     await cmdLineNormalise(config)
     configure(config)
     await cmdLineSanityCheck(config)
@@ -193,7 +193,7 @@ JSON files
 The fuction also assigns `config.args` (which is the list of files to be
 converted) to `config.sources`.
 
-To sum up: when using Docco Next as a library, `config.languages` and `config.marked`
+To sum up: when using Docco Next as a library, `config.languages` and `config.maked`
 will need to be objects. However, from the command line, they will be the paths of
 JSON files, and will be converted to objects by `cmdLineNormalise()`, which
 reads:
@@ -511,6 +511,7 @@ Here is the source code:
 ```
 async function documentOne (source, config = {}) {
   configure(config)
+  /* console.log(source) */
 
   const buffer = await fs.readFile(source)
   let lines = buffer.toString().split('\n')
@@ -795,10 +796,14 @@ async function formatAsHtml (source, sections, config = {}, lang) {
       else section.codeHtml = ''
       if (config.plugin.beforeMarked) {
         const newText = await config.plugin.beforeMarked(section.docsText)
-        if (newText !== section.docsText) console.log('newtext:', newText)
         section.docsText = newText
       }
       section.docsHtml = marked(section.docsText)
+
+      if (config.plugin.afterHtml) {
+        const newHtml = await config.plugin.afterHtml(section.docsHtml)
+        section.docsHtml = newHtml
+      }
     }
   }
 
@@ -823,6 +828,31 @@ async function formatAsHtml (source, sections, config = {}, lang) {
         path.relative(from, to),
         path.basename(file)
       )
+    }
+
+    function includeText (source) {
+      return (s, silentFail) => {
+        let contents
+        let file
+        const sourceDir = path.dirname(source)
+        if (path.isAbsolute(s)) {
+          file = s
+        } else {
+          file = path.join(sourceDir, s)
+        }
+        try {
+          contents = fs.readFileSync(file)
+          return contents
+        } catch (e) {
+          if (silentFail && e.code === 'ENOENT') return ''
+          if (e.code === 'ENOENT') {
+            console.error('Could not load included file:', file)
+          } else {
+            console.log(e)
+          }
+          process.exit(100)
+        }
+      }
     }
 
     const thisFile = finalPath(source, config)
@@ -856,6 +886,7 @@ async function formatAsHtml (source, sections, config = {}, lang) {
 
     /* Make up the HTML based on the template */
     const html = template({
+      includeText: includeText(source),
       source,
       sources: config.sources,
       css,

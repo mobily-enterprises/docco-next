@@ -50,11 +50,11 @@ need a proprocessor, for example to convert the <code>.js.md</code> file into <c
 <a href="https://github.com/vijithassar/lit">lit</a> is one of such tools. In Node, you
 can use Rich Harris’s <a href="https://github.com/Rich-Harris/lit-node">lit-node</a>
 to require .md files directly.</p>
-<p>Docco Next works with normal source code (such as .js or .c) as well as literate
+<p>Docco Next works with normal source code (such as <code>.js</code> or <code>.c</code>) as well as literate
 source code (such as literate CoffeeScript, <code>.litcoffee</code>, or <code>.js.md</code>).</p>
 <p>With pure literate style, all you have to do is add the .md extension to your
 source file.</p>
-<p>When processing source files (such as .js or .c), one line comments are considered
+<p>When processing source files (such as <code>.js</code> or <code>.c</code>), one line comments are considered
 documentation and are parsed using Markdown. The code (that is, anything that is
 not a one-line comment)  is processed by <a href="http://highlightjs.org/">Highlight.js</a>.</p>
 <p>In both cases, the end result is a set of HTML pages with your documentation.</p>
@@ -156,7 +156,7 @@ out how the command is used.</p>
     .option(<span class="hljs-string">'-x, --outputExtension [ext]'</span>, <span class="hljs-string">'set default file extension for all outputs'</span>)
     .parse(args)
   <span class="hljs-keyword">if</span> (commander.args.length) {
-    <span class="hljs-keyword">const</span> config = { ...commander }
+    <span class="hljs-keyword">const</span> config = { ...commander.opts(), <span class="hljs-attr">args</span>: commander.args }
     <span class="hljs-keyword">await</span> cmdLineNormalise(config)
     configure(config)
     <span class="hljs-keyword">await</span> cmdLineSanityCheck(config)
@@ -487,6 +487,7 @@ HTML string based on the array of sections passed</li>
 
         <div class='highlight'><pre><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">documentOne</span> (<span class="hljs-params">source, config = {}</span>) </span>{
   configure(config)
+  <span class="hljs-comment">/* console.log(source) */</span>
 
   <span class="hljs-keyword">const</span> buffer = <span class="hljs-keyword">await</span> fs.readFile(source)
   <span class="hljs-keyword">let</span> lines = buffer.toString().split(<span class="hljs-string">'\n'</span>)
@@ -754,10 +755,14 @@ global variable.</p>
       <span class="hljs-keyword">else</span> section.codeHtml = <span class="hljs-string">''</span>
       <span class="hljs-keyword">if</span> (config.plugin.beforeMarked) {
         <span class="hljs-keyword">const</span> newText = <span class="hljs-keyword">await</span> config.plugin.beforeMarked(section.docsText)
-        <span class="hljs-keyword">if</span> (newText !== section.docsText) <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'newtext:'</span>, newText)
         section.docsText = newText
       }
       section.docsHtml = marked(section.docsText)
+
+      <span class="hljs-keyword">if</span> (config.plugin.afterHtml) {
+        <span class="hljs-keyword">const</span> newHtml = <span class="hljs-keyword">await</span> config.plugin.afterHtml(section.docsHtml)
+        section.docsHtml = newHtml
+      }
     }
   }
 
@@ -782,6 +787,31 @@ global variable.</p>
         path.relative(<span class="hljs-keyword">from</span>, to),
         path.basename(file)
       )
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">includeText</span> (<span class="hljs-params">source</span>) </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">s, silentFail</span>) =&gt;</span> {
+        <span class="hljs-keyword">let</span> contents
+        <span class="hljs-keyword">let</span> file
+        <span class="hljs-keyword">const</span> sourceDir = path.dirname(source)
+        <span class="hljs-keyword">if</span> (path.isAbsolute(s)) {
+          file = s
+        } <span class="hljs-keyword">else</span> {
+          file = path.join(sourceDir, s)
+        }
+        <span class="hljs-keyword">try</span> {
+          contents = fs.readFileSync(file)
+          <span class="hljs-keyword">return</span> contents
+        } <span class="hljs-keyword">catch</span> (e) {
+          <span class="hljs-keyword">if</span> (silentFail &amp;&amp; e.code === <span class="hljs-string">'ENOENT'</span>) <span class="hljs-keyword">return</span> <span class="hljs-string">''</span>
+          <span class="hljs-keyword">if</span> (e.code === <span class="hljs-string">'ENOENT'</span>) {
+            <span class="hljs-built_in">console</span>.error(<span class="hljs-string">'Could not load included file:'</span>, file)
+          } <span class="hljs-keyword">else</span> {
+            <span class="hljs-built_in">console</span>.log(e)
+          }
+          process.exit(<span class="hljs-number">100</span>)
+        }
+      }
     }
 
     <span class="hljs-keyword">const</span> thisFile = finalPath(source, config)
@@ -815,6 +845,7 @@ global variable.</p>
 
     <span class="hljs-comment">/* Make up the HTML based on the template */</span>
     <span class="hljs-keyword">const</span> html = template({
+      <span class="hljs-attr">includeText</span>: includeText(source),
       source,
       <span class="hljs-attr">sources</span>: config.sources,
       css,

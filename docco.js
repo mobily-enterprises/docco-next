@@ -459,7 +459,7 @@ async function documentAll (config = {}) {
 
 async function documentOne (source, config = {}) {
   configure(config)
-  // console.log(source)
+  /* console.log(source) */
 
   const buffer = await fs.readFile(source)
   let lines = buffer.toString().split('\n')
@@ -728,14 +728,12 @@ async function formatAsHtml (source, sections, config = {}, lang) {
       else section.codeHtml = ''
       if (config.plugin.beforeMarked) {
         const newText = await config.plugin.beforeMarked(section.docsText)
-        // if (newText !== section.docsText) console.log('newtext:', newText)
         section.docsText = newText
       }
       section.docsHtml = marked(section.docsText)
 
       if (config.plugin.afterHtml) {
         const newHtml = await config.plugin.afterHtml(section.docsHtml)
-        // if (newText !== section.docsText) console.log('newtext:', newText)
         section.docsHtml = newHtml
       }
     }
