@@ -766,11 +766,10 @@ async function formatAsHtml (source, sections, config = {}, lang) {
       return (s, silentFail) => {
         let contents
         let file
-        const sourceDir = path.dirname(source)
         if (path.isAbsolute(s)) {
           file = s
         } else {
-          file = path.join(sourceDir, s)
+          file = s
         }
         try {
           contents = fs.readFileSync(file)
