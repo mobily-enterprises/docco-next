@@ -11,7 +11,7 @@
     "docs": "bin/docco -o .  -l plain -x md  ./docco.js;mv docco.md README.md;bin/docco -o docs  docco.js;mv docs/docco.html docs/index.html"
   },
   "author": "Tony Mobily",
-  "version": "0.9.7",
+  "version": "0.9.8",
   "license": "GPL3",
   "repository": {
     "type": "git",

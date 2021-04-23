@@ -463,21 +463,21 @@ async function documentOne (source, config = {}) {
 
   const buffer = await fs.readFile(source)
   let lines = buffer.toString().split('\n')
+  const path = finalPath(source, config)
 
-  const lang = getLanguage(source, config)
-  if (lang) {
-    if (lang.literate) {
-      lines = litToCode(lines, lang)
-    }
-    const sections = parse(source, lines, config, lang)
-
-    const result = await formatAsHtml(source, sections, config, lang)
-    const path = finalPath(source, config)
-
-    await write(source, path, result)
-  } else {
+  config.lang = getLanguage(source, config)
+  if (!config.lang) {
     console.warn(`docco: file not processed, language not supported: (${path.basename(source)})`)
+    return
   }
+  if (config.lang.literate) {
+    lines = litToCode(lines, config)
+  }
+  const sections = parse(source, lines, config)
+
+  const result = await formatAsHtml(source, sections, config)
+
+  await write(source, path, result)
 }
 
 // The actual parsing and manipulation
@@ -516,7 +516,10 @@ async function documentOne (source, config = {}) {
 // for example `something.js.md` -- that is, a Markdown file that
 // contains Javascript
 
-function litToCode (lines, lang) {
+function litToCode (lines, config) {
+  configure(config)
+
+  const lang = config.lang
   const retLines = []
   const markdownIndented = /^([ ]{4}|[ ]{0,3}\t)/
   let inCode = lines[0] && markdownIndented.exec(lines[0])
@@ -581,12 +584,13 @@ function litToCode (lines, lang) {
 // used: if there is anything in `codeText`, it means that the parser is
 // in the middle of a code section, and therefore the empty line will be
 // added to that code section.
-function parse (source, lines, config = {}, lang) {
+function parse (source, lines, config = {}) {
   let codeText, docsText
   const sections = []
 
   configure(config)
 
+  const lang = config.lang
   docsText = codeText = ''
   for (let line of lines) {
     /* If the line is not empty, it will either go in the code section */
@@ -690,8 +694,10 @@ function parse (source, lines, config = {}, lang) {
 // multiple times, once for each passed file). Memoization avoids using a
 // global variable.
 //
-async function formatAsHtml (source, sections, config = {}, lang) {
+async function formatAsHtml (source, sections, config = {}) {
   configure(config)
+
+  const lang = config.lang
 
   /* Format sections, as HTML (from Markdown) or as highlighted code */
   await formatSections(source, sections, config, lang)
@@ -817,6 +823,7 @@ async function formatAsHtml (source, sections, config = {}, lang) {
 
     /* Make up the HTML based on the template */
     const html = template({
+      lang,
       includeText: includeText(source),
       source,
       sources: config.sources,
