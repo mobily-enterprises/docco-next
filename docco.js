@@ -237,7 +237,10 @@ async function cmdLineNormalise (config) {
 // You can see this function as insurance that there is a solid, valid `config`
 // object that every call can use. This is why every single function that uses
 // `config` will call `configure` first.
-
+//
+// If a plugin was specified, `highlightjs` is passed to `plugin.configureHighlight`.
+// This allows users to register a language, or otherwise configure HighlightJS.
+//
 function configure (config) {
   if (config.configured) return
   config.configured = true
@@ -274,6 +277,10 @@ function configure (config) {
     }
     return there
   })
+
+  if (config.plugin.configureHighlight) {
+    config.plugin.configureHighlight(highlightjs)
+  }
 }
 
 // ### **Step 3: `cmdLineSanityCheck()`**
