@@ -1,14 +1,19 @@
 /*--------------------- Layout and Typography ----------------------------*/
-html { height: 100%; }
+html {
+  height: 100%;
+}
 body {
   font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif;
   font-size: 14px;
   line-height: 16px;
   color: #252519;
-  margin: 0; padding: 0;
-  height:100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
-#container { min-height: 100%; }
+#container {
+  min-height: 100%;
+}
 
 a {
   color: #261a3b;
@@ -18,11 +23,18 @@ a:visited {
   color: #261a3b;
 }
 
-p, ul, ol {
+p,
+ul,
+ol {
   margin: 0 0 15px;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 30px 0 15px 0;
 }
 
@@ -37,16 +49,20 @@ hr {
   margin: 20px 0;
 }
 
-pre, tt, code {
-  font-size: 12px; line-height: 16px;
-  font-family: Menlo, Monaco, Consolas, "Lucida Console", monospace;
-  margin: 0; padding: 0;
+pre,
+tt,
+code {
+  font-size: 12px;
+  line-height: 16px;
+  font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+  margin: 0;
+  padding: 0;
 }
 
 ul.sections {
   list-style: none;
-  padding:0 0 5px 0;;
-  margin:0;
+  padding: 0 0 5px 0;
+  margin: 0;
 }
 
 /*
@@ -56,20 +72,22 @@ ul.sections {
   More Info : http://www.quirksmode.org/css/box.html
 */
 ul.sections > li > div {
-  -moz-box-sizing: border-box;    /* firefox */
-  -ms-box-sizing: border-box;     /* ie */
+  -moz-box-sizing: border-box; /* firefox */
+  -ms-box-sizing: border-box; /* ie */
   -webkit-box-sizing: border-box; /* webkit */
-  -khtml-box-sizing: border-box;  /* konqueror */
-  box-sizing: border-box;         /* css3 */
+  -khtml-box-sizing: border-box; /* konqueror */
+  box-sizing: border-box; /* css3 */
 }
 
-
 /*---------------------- Jump Page -----------------------------*/
-#jump_to, #jump_page {
+#jump_to,
+#jump_page {
   margin: 0;
   background: white;
-  -webkit-box-shadow: 0 0 25px #777; -moz-box-shadow: 0 0 25px #777;
-  -webkit-border-bottom-left-radius: 5px; -moz-border-radius-bottomleft: 5px;
+  -webkit-box-shadow: 0 0 25px #777;
+  -moz-box-shadow: 0 0 25px #777;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
   font: 16px Arial;
   cursor: pointer;
   text-align: right;
@@ -89,16 +107,18 @@ ul.sections > li > div {
   color: #676767;
 }
 
-#jump_to, #jump_wrapper {
+#jump_to,
+#jump_wrapper {
   position: fixed;
-  right: 0; top: 0;
+  right: 0;
+  top: 0;
   padding: 10px 15px;
-  margin:0;
+  margin: 0;
 }
 
 #jump_wrapper {
   display: none;
-  padding:0;
+  padding: 0;
 }
 
 #jump_to:hover #jump_wrapper {
@@ -126,28 +146,31 @@ ul.sections > li > div {
 
 /*---------------------- Low resolutions (> 320px) ---------------------*/
 @media only screen and (min-width: 320px) {
-  .sswrap { display: none; }
+  .sswrap {
+    display: none;
+  }
 
   ul.sections > li > div {
     display: block;
-    padding:5px 10px 0 10px;
+    padding: 5px 10px 0 10px;
   }
 
   ul.sections > li > div.annotation {
     background: #fff;
   }
 
-  ul.sections > li > div.annotation ul, ul.sections > li > div.annotation ol {
+  ul.sections > li > div.annotation ul,
+  ul.sections > li > div.annotation ol {
     padding-left: 30px;
   }
 
   ul.sections > li > div.content {
     background: #f5f5ff;
-    overflow-x:auto;
+    overflow-x: auto;
     -webkit-box-shadow: inset 0 0 5px #e5e5ee;
     box-shadow: inset 0 0 5px #e5e5ee;
-    border: 1px solid #dedede;
-    margin:5px 10px 5px 10px;
+    /* border: 1px solid #dedede; */
+    margin: 5px 10px 5px 10px;
     padding-bottom: 5px;
   }
 
@@ -156,11 +179,12 @@ ul.sections > li > div {
     padding-left: 15px;
   }
 
-  ul.sections > li > div.annotation p tt, .annotation code {
+  ul.sections > li > div.annotation p tt,
+  .annotation code {
     background: #f8f8ff;
-    border: 1px solid #dedede;
+    /* border: 1px solid #dedede; */
     font-size: 12px;
-    padding: 0 0.2em;
+    /* padding: 0 0.2em; */
   }
 }
 
@@ -170,11 +194,13 @@ ul.sections > li > div {
     position: relative;
   }
   body {
-    background-color: #F5F5FF;
+    background-color: #f5f5ff;
     font-size: 15px;
     line-height: 22px;
   }
-  pre, tt, code {
+  pre,
+  tt,
+  code {
     line-height: 18px;
   }
 
@@ -184,7 +210,8 @@ ul.sections > li > div {
   #jump_wrapper {
     padding: 0;
   }
-  #jump_to, #jump_page {
+  #jump_to,
+  #jump_page {
     font: 10px Arial;
     text-transform: uppercase;
   }
@@ -198,18 +225,18 @@ ul.sections > li > div {
     display: none;
   }
 
-
-
   #background {
     position: absolute;
-    top: 0; bottom: 0;
+    top: 0;
+    bottom: 0;
     width: 350px;
     background: #ffffff;
     border-right: 1px solid #e5e5ee;
     z-index: -1;
   }
 
-  ul.sections > li > div.annotation ul, ul.sections > li > div.annotation ol {
+  ul.sections > li > div.annotation ul,
+  ul.sections > li > div.annotation ol {
     padding-left: 40px;
   }
 
@@ -255,17 +282,21 @@ ul.sections > li > div {
     text-decoration: none;
     color: #454545;
     position: absolute;
-    top: 3px; left: -20px;
+    top: 3px;
+    left: -20px;
     padding: 1px 2px;
     opacity: 0;
     -webkit-transition: opacity 0.2s linear;
+    transition: opacity 0.2s linear;
   }
-    .for-h1 .ss {
-      top: 47px;
-    }
-    .for-h2 .ss, .for-h3 .ss, .for-h4 .ss {
-      top: 35px;
-    }
+  .for-h1 .ss {
+    top: 47px;
+  }
+  .for-h2 .ss,
+  .for-h3 .ss,
+  .for-h4 .ss {
+    top: 35px;
+  }
 
   ul.sections > li > div.annotation:hover .ss {
     opacity: 1;
@@ -274,7 +305,6 @@ ul.sections > li > div {
 
 /*---------------------- (> 1025px) ---------------------*/
 @media only screen and (min-width: 1025px) {
-
   #background {
     width: 525px;
   }
@@ -290,8 +320,14 @@ ul.sections > li > div {
 
 /*---------------------- Syntax Highlighting -----------------------------*/
 
-td.linenos { background-color: #f0f0f0; padding-right: 10px; }
-span.lineno { background-color: #f0f0f0; padding: 0 5px 0 5px; }
+td.linenos {
+  background-color: #f0f0f0;
+  padding-right: 10px;
+}
+span.lineno {
+  background-color: #f0f0f0;
+  padding: 0 5px 0 5px;
+}
 /*
 
 github.com style (c) Vasily Polovnyov <vast@whiteants.net>
@@ -299,9 +335,8 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 */
 
 pre code {
-  display: block; padding: 0.5em;
-  color: #000;
-  background: #f8f8ff
+  display: block;
+  padding: 0.5em;
 }
 
 pre .hljs-comment,
@@ -309,7 +344,7 @@ pre .hljs-template_comment,
 pre .hljs-diff .hljs-header,
 pre .hljs-javadoc {
   color: #408080;
-  font-style: italic
+  font-style: italic;
 }
 
 pre .hljs-keyword,
@@ -326,7 +361,7 @@ pre .hljs-subst {
 
 pre .hljs-number,
 pre .hljs-hexcolor {
-  color: #40a070
+  color: #40a070;
 }
 
 pre .hljs-string,
@@ -338,23 +373,23 @@ pre .hljs-tex .hljs-formula {
 
 pre .hljs-title,
 pre .hljs-id {
-  color: #19469D;
+  color: #19469d;
 }
 pre .hljs-params {
-  color: #00F;
+  color: #00f;
 }
 
 pre .hljs-javascript .hljs-title,
 pre .hljs-lisp .hljs-title,
 pre .hljs-subst {
-  font-weight: normal
+  font-weight: normal;
 }
 
 pre .hljs-class .hljs-title,
 pre .hljs-haskell .hljs-label,
 pre .hljs-tex .hljs-command {
   color: #458;
-  font-weight: bold
+  font-weight: bold;
 }
 
 pre .hljs-tag,
@@ -362,23 +397,23 @@ pre .hljs-tag .hljs-title,
 pre .hljs-rules .hljs-property,
 pre .hljs-django .hljs-tag .hljs-keyword {
   color: #000080;
-  font-weight: normal
+  font-weight: normal;
 }
 
 pre .hljs-attribute,
 pre .hljs-variable,
 pre .hljs-instancevar,
 pre .hljs-lisp .hljs-body {
-  color: #008080
+  color: #008080;
 }
 
 pre .hljs-regexp {
-  color: #B68
+  color: #b68;
 }
 
 pre .hljs-class {
   color: #458;
-  font-weight: bold
+  font-weight: bold;
 }
 
 pre .hljs-symbol,
@@ -388,14 +423,14 @@ pre .hljs-ruby .hljs-symbol .hljs-keymethods,
 pre .hljs-lisp .hljs-keyword,
 pre .hljs-tex .hljs-special,
 pre .hljs-input_number {
-  color: #990073
+  color: #990073;
 }
 
 pre .hljs-builtin,
 pre .hljs-constructor,
 pre .hljs-built_in,
 pre .hljs-lisp .hljs-title {
-  color: #0086b3
+  color: #0086b3;
 }
 
 pre .hljs-preprocessor,
@@ -404,23 +439,23 @@ pre .hljs-doctype,
 pre .hljs-shebang,
 pre .hljs-cdata {
   color: #999;
-  font-weight: bold
+  font-weight: bold;
 }
 
 pre .hljs-deletion {
-  background: #fdd
+  background: #fdd;
 }
 
 pre .hljs-addition {
-  background: #dfd
+  background: #dfd;
 }
 
 pre .hljs-diff .hljs-change {
-  background: #0086b3
+  background: #0086b3;
 }
 
 pre .hljs-chunk {
-  color: #aaa
+  color: #aaa;
 }
 
 pre .hljs-tex .hljs-formula {

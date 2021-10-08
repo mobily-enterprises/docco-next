@@ -37,19 +37,25 @@
 /* Sets up some default values for the HTML elements */
 
 body {
-  font-family: "Manjari", sans-serif;
+  font-family: 'Manjari', sans-serif;
   /* background: f; */
   margin: 0;
   color: #343434;
   line-height: 1.15em;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Montserrat SemiBold', sans-serif;
   line-height: 1.2em;
 }
 
-h1, h2 {
+h1,
+h2 {
   text-align: center;
   margin-block-start: 1.25em;
   margin-block-end: 1.05em;
@@ -85,7 +91,6 @@ a {
   color: #2f6ec1;
   text-decoration: none;
   border-bottom: 2px solid #b8d0f9;
-
 }
 
 a:hover {
@@ -100,11 +105,10 @@ a:visited {
   border-bottom: 3px solid #d5b8ff;
 }
 
-b, strong {
-  font-family: "Manjari Bold";
+b,
+strong {
+  font-family: 'Manjari Bold';
 }
-
-
 
 /* Layout */
 /* These are the actual layout rules. */
@@ -114,10 +118,17 @@ div.container {
   width: 100vw;
   background-color: #ededed;
   padding: 60px 0;
-  background: #000000;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  background: #000000; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #434343,
+    #000000
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #434343,
+    #000000
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 div.main {
@@ -133,11 +144,11 @@ div.main {
 }
 
 div.main p {
-  line-height: 1.3em
+  line-height: 1.3em;
 }
 
-pre, code {
-  background-color: #efefef;
+pre,
+code {
   line-height: 1.5em;
   font-size: 0.9em;
   padding: 1px 6px;
@@ -152,7 +163,8 @@ pre {
 }
 
 pre:hover {
-  box-shadow: 0 2px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
   transition: box-shadow 0.3s ease-in-out;
   border: 1px solid #e7e7e7;
 }
@@ -176,9 +188,6 @@ footer a:hover {
 footer a:visited {
   color: #d5b8ff;
 }
-
-
-
 
 /* Responsive behavior rules */
 
@@ -205,7 +214,7 @@ pre .hljs-template_comment,
 pre .hljs-diff .hljs-header,
 pre .hljs-javadoc {
   color: #408080;
-  font-style: italic
+  font-style: italic;
 }
 
 pre .hljs-keyword,
@@ -222,7 +231,7 @@ pre .hljs-subst {
 
 pre .hljs-number,
 pre .hljs-hexcolor {
-  color: #40a070
+  color: #40a070;
 }
 
 pre .hljs-string,
@@ -234,23 +243,23 @@ pre .hljs-tex .hljs-formula {
 
 pre .hljs-title,
 pre .hljs-id {
-  color: #19469D;
+  color: #19469d;
 }
 pre .hljs-params {
-  color: #00F;
+  color: #00f;
 }
 
 pre .hljs-javascript .hljs-title,
 pre .hljs-lisp .hljs-title,
 pre .hljs-subst {
-  font-weight: normal
+  font-weight: normal;
 }
 
 pre .hljs-class .hljs-title,
 pre .hljs-haskell .hljs-label,
 pre .hljs-tex .hljs-command {
   color: #458;
-  font-weight: bold
+  font-weight: bold;
 }
 
 pre .hljs-tag,
@@ -258,23 +267,23 @@ pre .hljs-tag .hljs-title,
 pre .hljs-rules .hljs-property,
 pre .hljs-django .hljs-tag .hljs-keyword {
   color: #000080;
-  font-weight: normal
+  font-weight: normal;
 }
 
 pre .hljs-attribute,
 pre .hljs-variable,
 pre .hljs-instancevar,
 pre .hljs-lisp .hljs-body {
-  color: #008080
+  color: #008080;
 }
 
 pre .hljs-regexp {
-  color: #B68
+  color: #b68;
 }
 
 pre .hljs-class {
   color: #458;
-  font-weight: bold
+  font-weight: bold;
 }
 
 pre .hljs-symbol,
@@ -284,14 +293,14 @@ pre .hljs-ruby .hljs-symbol .hljs-keymethods,
 pre .hljs-lisp .hljs-keyword,
 pre .hljs-tex .hljs-special,
 pre .hljs-input_number {
-  color: #990073
+  color: #990073;
 }
 
 pre .hljs-builtin,
 pre .hljs-constructor,
 pre .hljs-built_in,
 pre .hljs-lisp .hljs-title {
-  color: #0086b3
+  color: #0086b3;
 }
 
 pre .hljs-preprocessor,
@@ -300,23 +309,23 @@ pre .hljs-doctype,
 pre .hljs-shebang,
 pre .hljs-cdata {
   color: #999;
-  font-weight: bold
+  font-weight: bold;
 }
 
 pre .hljs-deletion {
-  background: #fdd
+  background: #fdd;
 }
 
 pre .hljs-addition {
-  background: #dfd
+  background: #dfd;
 }
 
 pre .hljs-diff .hljs-change {
-  background: #0086b3
+  background: #0086b3;
 }
 
 pre .hljs-chunk {
-  color: #aaa
+  color: #aaa;
 }
 
 pre .hljs-tex .hljs-formula {

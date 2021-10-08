@@ -8,7 +8,8 @@
     "literate programming"
   ],
   "scripts": {
-    "docs": "bin/docco -o .  -l plain -x md  ./docco.js;mv docco.md README.md;bin/docco -o docs  docco.js;mv docs/docco.html docs/index.html"
+    "lint": "eslint --fix docco.js",
+    "docs": "bin/docco -o . -l plain -x md ./docco.js; mv docco.md README.md; bin/docco -l parallel -o docs docco.js; mv docs/docco.html docs/index.html"
   },
   "author": "Tony Mobily",
   "version": "0.9.8",
@@ -24,8 +25,8 @@
     "commander": ">= 0.7.0",
     "ejs": "^2.6.2",
     "fs-extra": ">= 0.6.0",
-    "highlight.js": ">= 8.0.x",
-    "marked": ">= 0.2.7"
+    "marked": ">= 0.2.7",
+    "shiki": "^0.9.11"
   },
   "devDependencies": {
     "eslint": "^6.3.0",
