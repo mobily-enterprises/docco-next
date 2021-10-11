@@ -13,8 +13,8 @@ code {
 
 code .line {
   width: 100%;
-  display: block;
-  margin-bottom: -18px;
+  display: inline-block;
+  line-height: 1rem;
 }
 code .line:target {
   backdrop-filter: hue-rotate(0.5turn) saturate(400%);
