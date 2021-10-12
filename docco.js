@@ -68,6 +68,7 @@
 // -----------------------------------------
 // The following libraries are required by Docco Next:
 // * `ejs`. Used to convert the layout master file into HTML
+// * `globby`. Used to [glob](https://en.wikipedia.org/wiki/Glob_(programming)) for filenames when the shell doesn't otherwise support this
 // * `fs-extra`. Used for all I/O operations
 // * `marked`. Used to convert Markdown into HTML
 // * `commander`. Used to interpret command line parameters
@@ -76,6 +77,7 @@
 // In Javascript terms, this becomes:
 const path = require('path')
 const ejs = require('ejs')
+const globby = require('globby')
 const fs = require('fs-extra')
 const marked = require('marked')
 const commander = require('commander')
@@ -212,7 +214,7 @@ async function cmdLineNormalise (config) {
     config.marked = JSON.parse(marked)
   }
 
-  config.sources = config.args
+  config.sources = await globby(config.args)
 }
 
 // ### **Step 2: `configure()`**
