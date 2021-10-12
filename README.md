@@ -758,7 +758,7 @@ function codeToHtml (highlighter, code, language, lineNumber) {
     const bg = options.bg || 'transparent'
 
     const hasLineNumbers = typeof options.lineNumber === 'number'
-    const lineNumber = options.lineNumber ?? 1
+    const lineNumber = options.lineNumber || 1
 
     const numberOfNonEmptyLines = lines.filter((l) => l.length > 0).length
     if (numberOfNonEmptyLines === 0) {
@@ -884,7 +884,7 @@ async function formatAsHtml (source, sections, config = {}) {
   /* Format and highlight the various section of the code, using */
   async function formatSections (source, sections, config = {}, lang) {
     const highlighter = await shiki.getHighlighter({
-      theme: config.shikiTheme ?? 'min-light'
+      theme: config.shikiTheme || 'min-light'
     })
 
     /* [Markdown](https://github.com/markedjs/marked) and Shiki */
