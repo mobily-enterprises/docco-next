@@ -15,21 +15,21 @@
     "Tony Mobily",
     "Seb Insua"
   ],
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "GPL3",
   "repository": {
     "type": "git",
     "url": "https://github.com/sebinsua/docco-next"
   },
   "engines": {
-    "node": ">=8.0"
+    "node": ">= 8.0"
   },
   "dependencies": {
-    "commander": ">= 0.7.0",
+    "commander": "^8.3.0",
     "ejs": "^2.6.2",
-    "fs-extra": ">= 0.6.0",
+    "fs-extra": "^10.0.0",
     "globby": "^11.0.4",
-    "marked": ">= 0.2.7",
+    "marked": "^4.0.0",
     "shiki": "^0.9.11"
   },
   "devDependencies": {

@@ -86,7 +86,7 @@ const path = require('path')
 const ejs = require('ejs')
 const globby = require('globby')
 const fs = require('fs-extra')
-const marked = require('marked')
+const { marked } = require('marked')
 const commander = require('commander')
 const shiki = require('shiki')
 
@@ -142,7 +142,7 @@ out how the command is used.
 This is the full set of options available in Docco Next:
 
 ```javascript
-async function run (args = process.argv) {
+async function run(args = process.argv) {
   commander
     .name('docco')
     .version(version)
@@ -212,7 +212,7 @@ reads:
 
 
 ```javascript
-async function cmdLineNormalise (config) {
+async function cmdLineNormalise(config) {
   if (config.languages) {
     if (!(await fileExists(config.languages))) {
       console.error('Languages file not found:', config.languages)
@@ -284,7 +284,7 @@ object that every call can use. This is why every single function that uses
 
 
 ```javascript
-function configure (config) {
+function configure(config) {
   if (config.configured) return
   config.configured = true
 
@@ -344,7 +344,7 @@ specified in the `sources` array.
 
 
 ```javascript
-async function cmdLineSanityCheck (config) {
+async function cmdLineSanityCheck(config) {
   if (config.output && !(await dirExists(config.output))) {
     console.error('Output directory not found:', config.output)
     process.exit(1)
@@ -408,7 +408,7 @@ Here is the code for those functions:
 
 
 ```javascript
-async function dirExists (dir) {
+async function dirExists(dir) {
   if (await fs.pathExists(dir)) {
     const stat = await fs.lstat(dir)
     return stat.isDirectory()
@@ -416,7 +416,7 @@ async function dirExists (dir) {
   return false
 }
 
-async function fileExists (dir) {
+async function fileExists(dir) {
   if (await fs.pathExists(dir)) {
     const stat = await fs.lstat(dir)
     return stat.isFile() || stat.isSymbolicLink()
@@ -424,7 +424,7 @@ async function fileExists (dir) {
   return false
 }
 
-function finalPath (source, config) {
+function finalPath(source, config) {
   const ext = config.outputExtension
   return path.join(
     config.output,
@@ -433,7 +433,7 @@ function finalPath (source, config) {
   )
 }
 
-async function copyAsset (file, type, config = {}) {
+async function copyAsset(file, type, config = {}) {
   configure(config)
   if (!file) return
   if (type === 'file' && !(await fileExists(file))) return
@@ -441,16 +441,16 @@ async function copyAsset (file, type, config = {}) {
   return fs.copy(file, path.join(config.output, path.basename(file)))
 }
 
-async function write (source, path, contents) {
+async function write(source, path, contents) {
   console.log(`docco: ${source} -> ${path}`)
   await fs.outputFile(path, contents)
 }
 
-function properObjectWithKeys (o) {
+function properObjectWithKeys(o) {
   return typeof o === 'object' && o !== null && Object.keys(o).length
 }
 
-function getLanguage (source, config = {}) {
+function getLanguage(source, config = {}) {
   configure(config)
 
   let codeExt, codeLang, lang
@@ -492,7 +492,7 @@ run `configure(config)` to make sure that sane defaults are set.
 
 
 ```javascript
-async function documentAll (config = {}) {
+async function documentAll(config = {}) {
   configure(config)
   await fs.mkdirs(config.output)
 
@@ -526,7 +526,7 @@ Here is the source code:
 
 
 ```javascript
-async function documentOne (source, config = {}) {
+async function documentOne(source, config = {}) {
   configure(config)
   /* console.log(source) */
 
@@ -595,7 +595,7 @@ contains Javascript
 
 
 ```javascript
-function litToCode (lines, config) {
+function litToCode(lines, config) {
   configure(config)
 
   const lang = config.lang
@@ -668,7 +668,7 @@ in the middle of a code section, and therefore the empty line will be
 added to that code section.
 
 ```javascript
-function parse (source, lines, config = {}) {
+function parse(source, lines, config = {}) {
   let codeText, docsText
   const sections = []
 
@@ -734,7 +734,7 @@ function parse (source, lines, config = {}) {
   return sections
 }
 
-function codeToHtml (highlighter, code, language, lineNumber) {
+function codeToHtml(highlighter, code, language, lineNumber) {
   const htmlEscapes = {
     '&': '&amp;',
     '<': '&lt;',
@@ -743,7 +743,7 @@ function codeToHtml (highlighter, code, language, lineNumber) {
     "'": '&#39;'
   }
 
-  function escapeHtml (html) {
+  function escapeHtml(html) {
     return html.replace(/[&<>"']/g, (chr) => htmlEscapes[chr])
   }
 
@@ -756,7 +756,7 @@ function codeToHtml (highlighter, code, language, lineNumber) {
   }
 
   /* See: https://github.com/shikijs/shiki/blob/f322a2b97470b25b26a4d8c1cf4892b059eb69db/packages/shiki/src/renderer.ts */
-  function renderToHtml (lines, options = {}) {
+  function renderToHtml(lines, options = {}) {
     const bg = options.bg || 'transparent'
 
     const hasLineNumbers = typeof options.lineNumber === 'number'
@@ -872,7 +872,7 @@ global variable.
 
 
 ```javascript
-async function formatAsHtml (source, sections, config = {}) {
+async function formatAsHtml(source, sections, config = {}) {
   configure(config)
 
   const lang = config.lang
@@ -884,7 +884,7 @@ async function formatAsHtml (source, sections, config = {}) {
   return makeHtmlBlob(source, sections, config, lang)
 
   /* Format and highlight the various section of the code, using */
-  async function formatSections (source, sections, config = {}, lang) {
+  async function formatSections(source, sections, config = {}, lang) {
     const highlighter = await shiki.getHighlighter({
       theme: config.shikiTheme || 'min-light'
     })
@@ -940,10 +940,10 @@ async function formatAsHtml (source, sections, config = {}) {
   /* Once all of the code has finished highlighting, we can **write** the resulting */
   /* documentation file by passing the completed HTML sections into the template, */
   /* and rendering it to the specified output path. */
-  async function makeHtmlBlob (source, sections, config = {}) {
+  async function makeHtmlBlob(source, sections, config = {}) {
     let first
 
-    async function _getTemplate (template) {
+    async function _getTemplate(template) {
       if (formatAsHtml._template) return formatAsHtml._template
 
       template = (await fs.readFile(template)).toString()
@@ -951,13 +951,13 @@ async function formatAsHtml (source, sections, config = {}) {
       return template
     }
 
-    function relativeToThisFile (file) {
+    function relativeToThisFile(file) {
       const from = path.resolve(path.dirname(thisFile))
       const to = path.resolve(path.dirname(file))
       return path.join(path.relative(from, to), path.basename(file))
     }
 
-    function includeText (source) {
+    function includeText(source) {
       return (s, silentFail) => {
         let contents
         let file
