@@ -77,7 +77,7 @@
 const path = require('path')
 const ejs = require('ejs')
 const fs = require('fs-extra')
-const marked = require('marked')
+const marked = require('marked').marked
 const commander = require('commander')
 const highlightjs = require('highlight.js')
 
@@ -720,7 +720,7 @@ async function formatAsHtml (source, sections, config = {}) {
       highlight: function (code, language) {
         if (!language) language = lang.name
         if (highlightjs.getLanguage(language)) {
-          return highlightjs.highlight(language, code).value
+          return highlightjs.highlight(code, { language }).value
         } else {
           console.warn(`${source}: language '${language}' not recognised, code block not highlighted`)
           return code
@@ -728,7 +728,7 @@ async function formatAsHtml (source, sections, config = {}) {
       }
     })
     for (const section of sections) {
-      let code = highlightjs.highlight(lang.name, section.codeText).value
+      let code = highlightjs.highlight(section.codeText, { language: lang.name }).value
       code = code.replace(/\s+$/, '')
       if (code !== '') section.codeHtml = `<div class='highlight'><pre>${code}</pre></div>`
       else section.codeHtml = ''

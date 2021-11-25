@@ -11,8 +11,8 @@
     "docs": "bin/docco -o .  -l plain -x md  ./docco.js;mv docco.md README.md;bin/docco -o docs  docco.js;mv docs/docco.html docs/index.html"
   },
   "author": "Tony Mobily",
-  "version": "0.9.8",
-  "license": "GPL3",
+  "version": "0.9.9",
+  "license": "GPL-3.0-or-later",
   "repository": {
     "type": "git",
     "url": "https://github.com/mobily-enterprises/docco-next"
@@ -21,21 +21,21 @@
     "node": ">=8.0"
   },
   "dependencies": {
-    "commander": ">= 0.7.0",
-    "ejs": "^2.6.2",
-    "fs-extra": ">= 0.6.0",
-    "highlight.js": ">= 8.0.x",
-    "marked": ">= 0.2.7"
+    "commander": "^7.x.x",
+    "ejs": "^3.x.x",
+    "fs-extra": "^10.x.x",
+    "highlight.js": "^11.x.x",
+    "marked": "^4.x.x"
   },
   "devDependencies": {
-    "eslint": "^6.3.0",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-html": "^6.0.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-lit": "^1.2.0",
+    "eslint": "^8.3.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-html": "^6.2.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-lit": "^1.6.1",
     "eslint-plugin-node": "^10.0.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1"
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-standard": "^4.1.0"
   },
   "main": "./docco",
   "bin": {
