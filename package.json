@@ -1,5 +1,5 @@
 {
-  "name": "@duplotech/docco-next",
+  "name": "docco-next",
   "description": "Literate programming parser",
   "keywords": [
     "documentation",
