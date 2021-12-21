@@ -10,7 +10,7 @@ See the [generated documentation as HTML](https://mobily-enterprises.github.io/d
 Install and use
 ---------------
 
-To use Docco Next run `npm install -g @duplotech/docco-next` and run it passing it a list of files
+To use Docco Next run `npm install -g docco-next` and run it passing it a list of files
 (e.g. `docco src/*js`)
 
 By default, every file will be converted into formatted HTML and will be placed in the
@@ -86,7 +86,7 @@ const path = require('path')
 const ejs = require('ejs')
 const globby = require('globby')
 const fs = require('fs-extra')
-const marked = require('marked')
+const marked = require('marked').marked
 const commander = require('commander')
 const shiki = require('shiki')
 
@@ -806,7 +806,7 @@ function codeToHtml (highlighter, code, language, lineNumber) {
       })
       html += '</span>\n'
     })
-    html = html.replace(/\n*$/, '') // Get rid of final new lines
+    html = html.replace(/\n*$/, '') /* Get rid of final new lines */
     html += '</code></pre>'
 
     return html
