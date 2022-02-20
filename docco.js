@@ -769,9 +769,16 @@ function codeToHtml (highlighter, code, language, lineNumber) {
 // each element has two properties, the leading `docsText` and the trailing
 // `codeText`. After running `formatSections()`, each element will also have
 // `docsHtml` and `codeHtml` (their respective HTML versions). This is done using
-// `markdown` for the docs, and `shiki` for the code. If a plugin was
-// specified, the filter `plugin.beforeMarked` will be run before feeding the text
-// to Marked. This allows users to extend Markdown as neeed.
+// `markdown` for the docs, and `shiki` for the code.
+//
+// If a plugin was
+// specified, the following functions from the plugin may be run:
+// 
+// * `plugin.beforeMarked` --  run before feeding the text to Marked. This 
+//   allows users to extend Markdown as neeed.  
+// * `plugin.afterHtml` -- run after the HTML has been generated
+// * `plugin.finalPass` -- run once the whole file has been generated and
+//   it's ready to be written on the disk.
 //
 // Since Markdown documentation can _also_ contain code (by indenting 4 spaces),
 // the `shiki` option is set for Markdown, instructing it what to do when

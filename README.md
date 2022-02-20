@@ -835,9 +835,16 @@ The first one, `formatSections()`, will take the `sections` array; remember:
 each element has two properties, the leading `docsText` and the trailing
 `codeText`. After running `formatSections()`, each element will also have
 `docsHtml` and `codeHtml` (their respective HTML versions). This is done using
-`markdown` for the docs, and `shiki` for the code. If a plugin was
-specified, the filter `plugin.beforeMarked` will be run before feeding the text
-to Marked. This allows users to extend Markdown as neeed.
+`markdown` for the docs, and `shiki` for the code.
+
+If a plugin was
+specified, the following functions from the plugin may be run:
+
+* `plugin.beforeMarked` --  run before feeding the text to Marked. This 
+  allows users to extend Markdown as neeed.  
+* `plugin.afterHtml` -- run after the HTML has been generated
+* `plugin.finalPass` -- run once the whole file has been generated and
+  it's ready to be written on the disk.
 
 Since Markdown documentation can _also_ contain code (by indenting 4 spaces),
 the `shiki` option is set for Markdown, instructing it what to do when
@@ -1012,7 +1019,7 @@ async function formatAsHtml (source, sections, config = {}) {
     const template = await _getTemplate(config.template)
 
     /* Make up the HTML based on the template */
-    const html = template({
+    let html = template({
       lang,
       includeText: includeText(source),
       source,
@@ -1028,6 +1035,12 @@ async function formatAsHtml (source, sections, config = {}) {
       destination: (path) => finalPath(path, config), // compatibility to Docco's original API
       relative: relativeToThisFile // compatibility to Docco's original API
     })
+
+    /* Run the final pass */
+    if (config.plugin.finalPass) {
+      html = await config.plugin.finalPass(html)
+    }
+
     return html
   }
 }
