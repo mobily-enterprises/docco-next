@@ -944,7 +944,7 @@ async function formatAsHtml (source, sections, config = {}) {
     const template = await _getTemplate(config.template)
 
     /* Make up the HTML based on the template */
-    const html = template({
+    let html = template({
       lang,
       includeText: includeText(source),
       source,
@@ -960,6 +960,12 @@ async function formatAsHtml (source, sections, config = {}) {
       destination: (path) => finalPath(path, config), // compatibility to Docco's original API
       relative: relativeToThisFile // compatibility to Docco's original API
     })
+
+    /* Run the final pass */
+    if (config.plugin.finalPass) {
+      html = await config.plugin.finalPass(html)
+    }
+
     return html
   }
 }
